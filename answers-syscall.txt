@@ -1,0 +1,6 @@
+Q1: usertrap() 调用了 syscall()，位置在 kernel/trap.c:68。
+Q2: p->trapframe->a7 = 0xf，代表 SYS_open，对应 init 调用 open("console", O_RDWR)。
+Q3: sstatus = 0x20000022，SPP 位为 0，表示从用户态陷入内核。
+Q4: 内核崩在 kernel.asm 地址 0x80001d18 处，指令是 lw a3,0(zero)，对应变量 num 的寄存器是 a3。
+Q5: 内核试图读地址 0，但地址 0 未被映射，触发 Load page fault（scause=0xd），内核崩溃。
+Q6: 崩溃时运行的进程是 init，pid 是 1。

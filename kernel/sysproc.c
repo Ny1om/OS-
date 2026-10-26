@@ -105,3 +105,18 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+uint64
+sys_interpose(void)
+{
+  int mask;
+  char path[MAXPATH];
+
+  argint(0, &mask);          // 第一个参数：mask
+  argstr(1, path, MAXPATH);  // 第二个参数：路径字符串
+
+  myproc()->mask = mask;
+  safestrcpy(myproc()->path, path, MAXPATH);  // 存进 proc
+
+  return 0;
+}
